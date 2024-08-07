@@ -1,0 +1,86 @@
+Here are some articles and tutorials related to solving the Grid World Problem using evolutionary algorithms:
+
+1. **Estimating learning rates in evolution and TDL: Results on a simple grid-world problem**
+   - This paper analyses a grid-world problem and calculates the upper bounds on the information rates for evolution and for temporal difference learning (TDL).
+   - [Read more on ResearchGate](https://www.researchgate.net/publication/224180068_Estimating_learning_rates_in_evolution_and_TDL_Results_on_a_simple_grid-world_problem)
+
+2. **A Pareto Front grid guided multi-objective evolutionary algorithm**
+   - This article discusses a grid-based evolutionary algorithm (GrEA) that decomposes the objective space with a grid and selects solutions using grid-based methods.
+   - [Read more on ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S1568494623001138)
+
+3. **[PDF] Evolutionary Reinforcement Learning for Sparse Rewards**
+   - This paper explores using an evolutionary algorithm in a Minecraft-inspired 2D grid world to address the issue of sparse rewards in reinforcement learning.
+   - [Read the PDF](http://www.cmap.polytechnique.fr/~nikolaus.hansen/proceedings/2021/GECCO/companion/companion_files/p1508-zhu.pdf)
+
+4. **Solve Grid world problem | PPT**
+   - A presentation on solving grid world problems using evolutionary computation and other algorithms.
+   - [View on SlideShare](https://www.slideshare.net/slideshow/solve-grid-world-problem-69179084/69179084)
+
+5. **[PDF] Cliff walking problem**
+   - This document models a virtual world called a grid-world and discusses solving it using biological evolution-inspired algorithms.
+   - [Read the PDF](https://neuro.bstu.by/ai/2010-s-project/cliff.pdf)
+
+6. **grid-world · GitHub Topics**
+   - A variety of novelty search methods for agents evolving in grid worlds, available on GitHub.
+   - [Explore on GitHub](https://github.com/topics/grid-world?l=python&o=asc&s=stars)
+
+7. **An Inhomogeneous Grid-Based Evolutionary Algorithm for Many Objective Problems**
+   - This paper proposes an inhomogeneous grid-based evolutionary algorithm (IGEA) that applies a dynamic grid structure.
+   - [Read more on IEEE Xplore](https://ieeexplore.ieee.org/document/9777956)
+
+8. **A comparative study of advanced evolutionary algorithms for optimizing microgrid performance**
+   - A study comparing various evolutionary algorithms for optimizing microgrid performance.
+   - [Read more on Nature](https://www.nature.com/articles/s41598-024-54829-9)
+
+9. **Part 1: Evolutionary Algorithms for Reinforcement Learning**
+   - An introduction to using evolutionary algorithms for reinforcement learning, with an example of training a neural network to play Gridworld.
+   - [Read on Medium](https://nandakishorej8.medium.com/part-1-evolutionary-algorithms-for-reinforcement-learning-an-introduction-e434d2a1d023)
+
+10. **An improved hyperparameter optimization framework for AutoML using hybrid differential evolution**
+    - Discusses a hybrid algorithm combining differential evolution and particle swarm optimization for solving global optimization problems, including grid search.
+    - [Read on NCBI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10036546/)
+
+These resources should provide a comprehensive overview of how evolutionary algorithms can be applied to solve grid world problems.
+
+---
+
+***Handling multiple papers?***
+
+Our AI sidebar -- Sider assists you skim through papers 10X faster using its 10+ one-click research tools like deep reader, advanced search, ChatPDF, and context selection. 
+[Get ready for a smarter academic experience!](https://bit.ly/4aSnMXa)
+
+
+你提到的关于突变策略的优化想法非常有价值，特别是在希望保持一定轨迹质量的同时进行改进时。这种策略被称为“局部搜索”或“邻域搜索”，它的核心思想是在一个好的解的周围进行探索，而不是在整个解空间中随机突变。
+
+### 实现邻域搜索的策略
+
+以下是几种实现这种邻域搜索突变的方法，确保突变在优秀轨迹的基础上进行，逐步探索并优化：
+
+1. **有限突变步长**：
+   - 对于每个 Q 值，突变的幅度可以限制在一个较小的范围内（例如，原值的 ±5%），这确保了突变不会过于激进，从而在保持原有策略效果的基础上进行细微调整。
+
+2. **高斯噪声突变**：
+   - 对于选定进行突变的 Q 值，添加的噪声可以来自以当前 Q 值为中心的正态分布，分布的标准差控制突变的幅度。这种方法使得突变更可能在当前值附近进行，从而实现局部优化。
+
+3. **基于梯度的调整**：
+   - 如果可以估算或近似计算 Q 值关于性能指标（如可读性）的梯度，可以使用这些信息来指导突变方向和幅度，类似于梯度下降法，但以概率形式实现。
+
+4. **轨迹片段的微调**：
+   - 识别成功轨迹中的关键片段或决策点，针对这些片段或决策点的 Q 值进行细微的调整。这种方法特别适合那些轨迹的特定部分对整体性能影响较大的情况。
+
+5. **自适应突变率**：
+   - 考虑将突变率与个体的性能相关联，表现好的个体有较低的突变率，以保持其稳定性；表现不佳的个体有较高的突变率，以增加其改进的可能性。
+
+### 示例算法
+```plaintext
+对于每个个体：
+  对于 Q-表中的每个 Q 值：
+    生成随机数 r
+    如果 r < 突变概率：
+      选择一个小的变化量 delta，例如 delta = N(0, 0.05 * Q_value)
+      更新 Q 值：Q_new = Q_value + delta
+```
+
+这种方法可以使突变过程更加集中和高效，同时减少由于过度突变引起的性能波动。通过这样的细致调整，可以在保持轨迹整体结构和性能的前提下，逐步探索并优化策略。
+
+如果需要进一步的帮助来实现这种方法，或者需要具体的编程实现建议，欢迎随时联系我。

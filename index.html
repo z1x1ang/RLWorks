@@ -16,47 +16,17 @@
     <section>
       <nav>
         <ul>
-          <li><a href="#" onclick="showContent('test')">实验1</a></li>
-          <li><a href="#">实验2</a></li>
+          <li><a href="#" onclick="showContent('experiment_1')">实验1</a></li>
+          <li><a href="#" onclick="showContent('experiment_2')">实验2</a></li>
           <li><a href="#">实验3</a></li>
         </ul>
       </nav>
-      
       <article id="article-content">
-        <h1>不同可读性的轨迹对智能体协作的影响</h1>
-        <div class="row">
-        <img id="gifImage" class="float-img" src="img/bukedu.gif" alt="图片加载中...">
-        <p>
-          如左图所示，蓝色智能体(观察者)观察黑色智能体的移动轨迹，进而通过贝叶斯公式判断智能体的的目标是 $g_1$ 还是$g_2$<br>
-          \(
-          P(g|\xi_{s_0 \rightarrow q}) = \frac{1}{z} \frac{\exp(-C(\xi_{s_0 \rightarrow q}) - C(\xi^*_{q \rightarrow g}))}{\exp(-C(\xi^*_{s_0 \rightarrow g}))} P(g)
-        \)
-       <br>
-        <small>(公式具体推导详见Bied与Dragan的论文以及下方的计算链接)</small> <br>
-        公式如上所示，由于已经过归一化处理，我们就设定: <br>
-        $P(g_1|\xi_{s_0 \rightarrow q})>0.5$ 蓝色智能体相信黑色智能体去$g_1$(观察者外框颜色:黄色)<br>
-        $P(g_1|\xi_{s_0 \rightarrow q})<0.5$ 蓝色智能体相信黑色智能体去$g_2$(观察者外框颜色:黑色)<br>
-        $P(g_1|\xi_{s_0 \rightarrow q})=0.5$ 蓝色智能体则随机相信智能体的下一个目标(观察者外框颜色:白色)
-        </p>
-        <p>通过上述规则,智能体决定自己下一步的动作策略的选择(Qlearning训练完成收敛的策略)，觉得蓝色智能体要去哪里自己就去另一个目标。<br>
-        左图的轨迹可读性并不是那么好，至少前五步，蓝色智能体还在随机确定目标，整体消耗的步数17步。</p>
-      </div>
-      <div style="clear: both;"></div> <!-- 清除浮动影响 -->  
-      <div class="row">
-        <img id="gifImage2" class="float-img" src="img/kedu.gif" alt="图片加载中...">
-        <p>如左图所示，黑色智能体所走的总步数仍为7步,但整体可读性显然更好(<a href="https://raw.githubusercontent.com/z1x1ang/Legible/master/%E5%8F%AF%E8%AF%BB%E6%80%A7%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B.jpg">具体计算过程</a>)，蓝色智能体从第一步一开始就对黑色智能体所要到达的目标充满信心，整体消耗步数15步。</p>
-        <p>通过分析可知,可读性较好的动作轨迹，能够有效减少系统的成本消耗。但同样过于追求较高的可读性(绕路),反而也会增加系统总的成本消耗，所以必须要把可读性$\lambda$限制在一定的范围内，这个可以作为进一步的研究方向。
-          \[
-          P_i = \frac{f_i}{\sum_{j=1}^{N} f_j}
-          \]
-        </p>
-      </div>
       </article>
     </section>
     <footer>
       <p>&copy; 2024</p>
     </footer>
-    
     <script src="script.js"></script>
     </body>
 </head>

@@ -54,8 +54,8 @@
         <img style="display:block; margin: 0px auto;" src="img/fig3.jpg">
         <h4>对比实验</h4>
         <p>和Bied的实验进行对比</p>
-        <img style="display:block; margin: 0px auto;" src="img/fig4.jpg">
-        <img style="display:block; margin: 0px auto;" src="img/result.PNG">
+        <img style="display:inline-block;" src="img/fig4.jpg" width="48%">
+        <img style="display:inline-block;" src="img/result.PNG" width="50%">
         <p>由图可知，与作者的各种奖励重塑方法，作者进行的是100sessions每个sessions共120episode,而本实验仅以
             开头的10条随机路径，只进行50代的循环，可以看出其legibility值以全面超越作者的奖励重塑方法。
         </p>
@@ -64,7 +64,8 @@
             清晰，直接从policy上进行优化，既可以排除奖励重塑方法中$\beta$对实验的影响($\beta$需反复实验，才能使得最终策略效果比较好)，也可以
             避免智能体在训练过程中出现的正反馈循环问题("刷分现象"，一个回合跑了数百步，仍难以跑到终点)，同时，此算法
             表现依旧出色，少量的迭代，便能产生优质的结果。由于，其逻辑实现的更为清晰，似乎将其扩展到更为复杂的系统中也
-            变得容易起来，比如连续空间，多智能体空间，动态空间等等，下一步，可以进一步深入一下。
+            变得容易起来，比如连续空间，多智能体空间，动态空间等等，也可更深入研究此算法，以配合
+            实验3的工作。
         </p>
     </p>
 </body>

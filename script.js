@@ -1,3 +1,4 @@
+showContent('experiment_1')
 function showContent(experiment){
 fetch(`${experiment}.html`)
 .then(response => response.text())  // 解析响应为JSON(也可为blob等)
