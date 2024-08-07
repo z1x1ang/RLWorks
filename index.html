@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <body>
     <header>
-      <h2>强化学习相关实验</h2>
+      <h2>强化学习论文相关实验</h2>
     </header>
     <section>
       <nav>
@@ -25,7 +25,7 @@
       <article id="article-content">
         <h1>不同可读性的轨迹对智能体协作的影响</h1>
         <div class="row">
-        <img id="gifImage" class="float-img" src="bukedu.gif" alt="图片加载中...">
+        <img id="gifImage" class="float-img" src="img/bukedu.gif" alt="图片加载中...">
         <p>
           如左图所示，蓝色智能体(观察者)观察黑色智能体的移动轨迹，进而通过贝叶斯公式判断智能体的的目标是 $g_1$ 还是$g_2$<br>
           \(
@@ -43,18 +43,56 @@
       </div>
       <div style="clear: both;"></div> <!-- 清除浮动影响 -->  
       <div class="row">
-        <img id="gifImage2" class="float-img" src="kedu.gif" alt="图片加载中...">
+        <img id="gifImage2" class="float-img" src="img/kedu.gif" alt="图片加载中...">
         <p>如左图所示，黑色智能体所走的总步数仍为7步,但整体可读性显然更好(<a href="https://raw.githubusercontent.com/z1x1ang/Legible/master/%E5%8F%AF%E8%AF%BB%E6%80%A7%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B.jpg">具体计算过程</a>)，蓝色智能体从第一步一开始就对黑色智能体所要到达的目标充满信心，整体消耗步数15步。</p>
         <p>通过分析可知,可读性较好的动作轨迹，能够有效减少系统的成本消耗。但同样过于追求较高的可读性(绕路),反而也会增加系统总的成本消耗，所以必须要把可读性$\lambda$限制在一定的范围内，这个可以作为进一步的研究方向。
+          \[
+          P_i = \frac{f_i}{\sum_{j=1}^{N} f_j}
+          \]
         </p>
       </div>
       </article>
     </section>
     <footer>
-      <p>Footer</p>
+      <p>&copy; 2024</p>
     </footer>
     
     <script src="script.js"></script>
     </body>
 </head>
 </html>
+
+使用更正式的数学符号和术语来描述上述的变异操作可以增加其表达的精确性。下面是更数学化的描述：
+
+设有一个路径 \(\xi\)，其中 \(\xi\) 是一个节点序列，表示某个个体的路线。在差分进化的变异操作中，我们首先计算突变段的长度和起始位置：
+
+1. **计算突变长度和起始索引**:
+   \[
+   L_{\text{mutation}} = \lfloor |\xi| \cdot r_{\text{mutation}} \rfloor
+   \]
+   \[
+   i_{\text{start}} = \lfloor \text{random()} \cdot (|\xi| - L_{\text{mutation}}) \rfloor
+   \]
+   其中，\( |\xi| \) 是路径 \(\xi\) 的长度，\( r_{\text{mutation}} \) 是给定的突变率，\(\text{random()}\) 生成一个 [0,1) 范围内的随机数。
+
+2. **确定突变段的结束索引**:
+   \[
+   i_{\text{end}} = \min(i_{\text{start}} + L_{\text{mutation}}, |\xi| - 1)
+   \]
+
+3. **生成突变段**:
+   \[
+   \xi_{\text{mutation}} = \text{MonteCarloPaths}(G, \xi[i_{\text{start}}], \xi[i_{\text{end}}], 1, L_{\text{mutation}} \times 4)
+   \]
+   这里，\(\xi[i_{\text{start}}]\) 和 \(\xi[i_{\text{end}}]\) 是突变段的起始和结束节点，\(G\) 是代表网格的图，\(\xi_{\text{mutation}}\) 是使用蒙特卡罗方法生成的新路径段。
+
+4. **组合新路径**:
+   \[
+   \xi' = [\xi[0 : i_{\text{start}}-1], \xi_{\text{mutation}}, \xi[i_{\text{end}}+1 : |\xi|]]
+   \]
+   其中，\(\xi'\) 是变异后可能的新路径。
+
+5. **检查新路径的合法性**:
+   如果 \(\xi'\) 中包含重复的节点，则保留原始路径 \(\xi\)，否则采用新路径 \(\xi'\)。
+
+这样的表述更加符合数学和计算机科学文献中的常规表达方式，更适合用于学术交流和论文写作。

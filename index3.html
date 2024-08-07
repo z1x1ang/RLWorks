@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>论文参考</h1>
+    <P>起点、终点、采样点数、点间步长、空集合V</P>
+    <p>将起点和终点存储在树的集合中</p>
+    <p>然后在空间中随机生成一个点Xr，并在V中找到离这个随机点最近的点Xn。</p>
+    <p>在Xn到Xr的直线方向上，从Xr截取点Xnew，步长为t。如果 Xn 和 Xnew 之间没有障碍物，则将 Xnew 添加到 V。</p>
+    <p>重复步骤 1 到步骤 4，直到 Xnew 和终点之间的距离小于 t。然后完成路径规划，得到初始个体。</p>
+    <p>在路径上找到相同的点进行交叉，从而保证路径的连续性[11]，然而，在三维空间中，路径包含同一点的概率较低，难以满足交叉操作的前提，且交叉对路径优化的贡献不大， 因此，本文选择了一种非交叉方案。突变是指个体的节点随机变化为新的节点，节点前后的节点与其连接，产生新的个体，从而增加种群的多样性。在突变之前，必须确定突变概率Pm，即每个个体都有Pm的突变概率 </p>
+<hr>
+<p>步骤1 对于突变个体，随机选择除起点和终点以外的个体的路径点[X，Y，Z]。这个路径点将个体分为路径的前半部分和路径的后半部分;步骤2 选择点[X，Y，Z]的坐标之一进行突变，例如，将点[X，Y，Z]更改为[Xa，Y，Z];步骤3 在路径的前半部分随机选择一个路径点[X1， Y1， Z1]，在路径的后半部分选择一个路径点[X2， Y2， Z2]，并使用插入算子连接[X1， Y1， Z1]和[X， Y ， Z]、[X， Y， Z]和[X2， Y2， Z2]。如果两条路径都成功连接，则将原始个体中起点到点的路径[X1，Y1，Z1]与三个点[X1，Y1，Z1]，[X，Y，Z]和[X2，Y2，Z2]相连的路径，以及从点[X2，Y2，Z2]到原始个体的终点的路径，在突变后创建一个新的个体。如果两条路径中的一条无法连接，则新个体将与原始个体相同[12]。</p>
+<p>
+    传统遗传算法的插入算子采用中点插值方法。虽然中点插值方法实现简单，但容易产生不可行的路径，难以绕过大障碍物，如图3所示
+</p>
+
+<!-- 参考文献 -->
+<p>
+    https://arxiv.org/pdf/2212.02010v1
+    https://link.springer.com/content/pdf/10.1007/978-981-16-9492-9_260.pdf
+    https://mospace.umsystem.edu/xmlui/bitstream/handle/10355/5021/research.pdf?sequence=3
+
+    中文：https://oss.wanfangdata.com.cn/Catalog/List?fileId=perio_xzjzzyjsxyxb202401014&transaction=%7B%22id%22%3Anull%2C%22transferOutAccountsStatus%22%3Anull%2C%22transaction%22%3A%7B%22id%22%3A%221819309375358009344%22%2C%22status%22%3A1%2C%22createDateTime%22%3Anull%2C%22payDateTime%22%3A1722592130876%2C%22authToken%22%3A%22TGT-209554-AO2dbBwpl92E5Zn1vfgWhaDsZiH3kx6qd5z3ROQYbmSPYR97jb-auth-iploginservice-b99c94df9-rmc54%22%2C%22user%22%3A%7B%22accountType%22%3A%22Group%22%2C%22key%22%3A%22zzsfxy%22%7D%2C%22transferIn%22%3A%7B%22accountType%22%3A%22Income%22%2C%22key%22%3A%22PeriodicalFulltext%22%7D%2C%22transferOut%22%3A%7B%22GBalanceLimit.zzsfxy%22%3A3.0%7D%2C%22turnover%22%3A3.0%2C%22orderTurnover%22%3A3.0%2C%22productDetail%22%3A%22perio_xzjzzyjsxyxb202401014%22%2C%22productTitle%22%3Anull%2C%22userIP%22%3A%2258.23.111.132%22%2C%22organName%22%3Anull%2C%22memo%22%3Anull%2C%22orderUser%22%3A%22zzsfxy%22%2C%22orderChannel%22%3A%22pc%22%2C%22payTag%22%3A%22%22%2C%22webTransactionRequest%22%3Anull%2C%22signature%22%3A%22J%2FODDch8JqMNy8uNNFtGjAr9jXVr44Z5b5qhJwnmd4iNeGqXfEIuctsXyI8rrxQ7r9SKJCXUH48W%5Cnk%2FfGZ8j9JRGAov98qkIEDkb8j6X2oMGACC7kJnthApABI5uGI4ySxKF96I%2BaIHn00wjL203rNMcy%5CnuVWYVLLVIPCEno3kqLw%3D%22%7D%2C%22isCache%22%3Afalse%7D
+    
+</p>
+</body>
+</html>
