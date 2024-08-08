@@ -9,7 +9,7 @@
    
         <h1>不同可读性的轨迹对智能体协作的影响</h1>
         <div class="row">
-        <img id="gifImage" class="float-img" src="img/bukedu.gif" alt="图片加载中...">
+        <img id="gifImage" class="float-img" src="img/illegible.gif" alt="图片加载中...">
         <p>
           如左图所示，蓝色智能体(观察者)观察黑色智能体的移动轨迹，进而通过贝叶斯公式判断智能体的的目标是 $g_1$ 还是$g_2$<br>
           \(
@@ -27,7 +27,7 @@
       </div>
       <div style="clear: both;"></div> <!-- 清除浮动影响 -->  
       <div class="row">
-        <img id="gifImage2" class="float-img" src="img/kedu.gif" alt="图片加载中...">
+        <img id="gifImage2" class="float-img" src="img/legible.gif" alt="图片加载中...">
         <p>如左图所示，黑色智能体所走的总步数仍为7步,但整体可读性显然更好(<a href="https://raw.githubusercontent.com/z1x1ang/Legible/master/%E5%8F%AF%E8%AF%BB%E6%80%A7%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B.jpg">具体计算过程</a>)，蓝色智能体从第一步一开始就对黑色智能体所要到达的目标充满信心，整体消耗步数15步。</p>
         <p>通过分析可知,可读性较好的动作轨迹，能够有效减少系统的成本消耗。但同样过于追求较高的可读性(绕路),反而也会增加系统总的成本消耗，所以必须要把可读性$\lambda$限制在一定的范围内，这个可以作为进一步的研究方向。
         </p>
