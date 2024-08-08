@@ -21,7 +21,7 @@ nav{
    height: 3700px;
    background-color:#ccc;
    float: left;
-   width: 6%;
+   width: 10%;
    padding:20px;
 }
 nav ul{
@@ -30,11 +30,10 @@ nav ul{
 }
 article{
  float: left;
- width: 94%;
+ width: 90%;
  padding: 20px;
- height: 1200px;
+ height: 3700px; 
  background-color: #f1f1f1;
- 
 }
 footer{
     text-align: center;

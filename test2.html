@@ -140,3 +140,25 @@
   </footer>
 </body>
 </html>
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <title>Markdown Rendering with Marked.js</title>
+</head>
+<body>
+  <div id="markdownOutput" class="markdown-body"></div>
+  <textarea id="markdownInput" style="display:none" title="Enter markdown text here" placeholder="Enter markdown...">
+    关于landmark的实验，我遇到了点问题。主要是没找到合适的方法去定义影响力节点，所以，我先做了其他实验(点击左侧实验2)
+  </textarea>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var markdownInput = document.getElementById('markdownInput').value;
+      var markdownOutput = document.getElementById('markdownOutput');
+      markdownOutput.innerHTML = marked.parse(markdownInput);
+    });
+  </script>
+</body>
+</html>

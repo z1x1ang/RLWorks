@@ -1,40 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>基于遗传算法的路径可读性增强方法</title>
+    <style>
+        p{
+            text-indent: 2em;
+            white-space: normal;
+
+        }
+    </style>
 </head>
 <body>
-   
-        <h1>不同可读性的轨迹对智能体协作的影响</h1>
-        <div class="row">
-        <img id="gifImage" class="float-img" src="img/bukedu.gif" alt="图片加载中...">
+    <h2 style="text-align: center;">基于遗传算法的路径可读性增强方法</h2>
+    <h3>问题引入</h3>
+    <p>通过分析图片中每条可读性较高的路径可以发现可读性较高的路径在某种程度上具有一定的相似性(图片中的路径可能没那么相似，但是，红圈中间可以嵌入大量可读性较高的轨迹)，这种相似性使得我们想到是否可以用遗传算法来生成出来这种可读性较高的路径,因为我们已经根据Dragan与Bied的论文得到了可以衡量可读性的公式,我们可以将其作为适应度公式的参考。
+       </p>
+       <img style="display:block; margin: 0px auto;" src="img/fig1.jpg" alt="图1">
         <p>
-          如左图所示，蓝色智能体(观察者)观察黑色智能体的移动轨迹，进而通过贝叶斯公式判断智能体的的目标是 $g_1$ 还是$g_2$<br>
-          \(
-          P(g|\xi_{s_0 \rightarrow q}) = \frac{1}{z} \frac{\exp(-C(\xi_{s_0 \rightarrow q}) - C(\xi^*_{q \rightarrow g}))}{\exp(-C(\xi^*_{s_0 \rightarrow g}))} P(g)
-        \)
-       <br>
-        <small>(公式具体推导详见Bied与Dragan的论文以及下方的计算链接)</small> <br>
-        公式如上所示，由于已经过归一化处理，我们就设定: <br>
-        $P(g_1|\xi_{s_0 \rightarrow q})>0.5$ 蓝色智能体相信黑色智能体去$g_1$(观察者外框颜色:黄色)<br>
-        $P(g_1|\xi_{s_0 \rightarrow q})<0.5$ 蓝色智能体相信黑色智能体去$g_2$(观察者外框颜色:黑色)<br>
-        $P(g_1|\xi_{s_0 \rightarrow q})=0.5$ 蓝色智能体则随机相信智能体的下一个目标(观察者外框颜色:白色)
+        于是按照遗传算法的一般步骤，进行了如下操作：
+        路径编码、种群初始化、定义适应度函数、选择算子、交叉算子、突变算子、以及最后分析实验结果。
+    </p>
+    <img style="display:block; margin: 0px auto;"  src="img/fig_2.jpg">
+    <p>
+        <h3>路径编码</h3>
+        <p>将一条路径视为一个个体，将路径中的状态点视为基因(即二维坐标视为一个基因，也可称作染色体的一个位置或位点)。<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如某个个体可以表示为：{[6,2],[5,2],[4,2],[3,2],[2,2],[1,2],[0,2],[0,3],[0,4]},多条路径(个体)构成了一个种群。
         </p>
-        <p>通过上述规则,智能体决定自己下一步的动作策略的选择(Qlearning训练完成收敛的策略)，觉得蓝色智能体要去哪里自己就去另一个目标。<br>
-        左图的轨迹可读性并不是那么好，至少前五步，蓝色智能体还在随机确定目标，整体消耗的步数17步。</p>
-      </div>
-      <div style="clear: both;"></div> <!-- 清除浮动影响 -->  
-      <div class="row">
-        <img id="gifImage2" class="float-img" src="img/kedu.gif" alt="图片加载中...">
-        <p>如左图所示，黑色智能体所走的总步数仍为7步,但整体可读性显然更好(<a href="https://raw.githubusercontent.com/z1x1ang/Legible/master/%E5%8F%AF%E8%AF%BB%E6%80%A7%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B.jpg">具体计算过程</a>)，蓝色智能体从第一步一开始就对黑色智能体所要到达的目标充满信心，整体消耗步数15步。</p>
-        <p>通过分析可知,可读性较好的动作轨迹，能够有效减少系统的成本消耗。但同样过于追求较高的可读性(绕路),反而也会增加系统总的成本消耗，所以必须要把可读性$\lambda$限制在一定的范围内，这个可以作为进一步的研究方向。
-          \[
-          P_i = \frac{f_i}{\sum_{j=1}^{N} f_j}
-          \]
+        <h3>种群初始化</h3>
+        <p>为保证初始路径的随机性，我们采用了蒙特卡洛随机搜索生成10条路径作为初始种群。为保证路径更为合理和方便计算，我们在生成路径的过程中，去除掉了有重复状态的路径，并对初始路径的长度进行了一定的限制。
         </p>
-      </div>
-      
+        <h3>定义适应度函数</h3>
+        <p>我们直接采用Bied的定义的可读性公式作为衡量适应度的标准(<a href="#" onclick="event.preventDefault();alert(`具体公式推导过程见Dragan和Bied的论文，计算过程见: https://raw.githubusercontent.com/z1x1ang/Legible/master/%E5%8F%AF%E8%AF%BB%E6%80%A7%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B.jpg`)">相关链接</a>)。
+            \[
+            \lambda(\xi) = \frac{\sum_{t} P(g^*|\xi_{s_0 \to s_t}) f(t)}{\sum_{t} f(t)}
+            \]
+        </p>
+        <h3>选择算子</h3>
+        <p>
+            算出每个个体的适应度(可读性)后，我们要重新定义每个个体被选择的概率，由于可读性公式中的
+            $\lambda(\xi)$是0到1之间的数值，因此直接可令其作为每个个体被选择的概率。之后计算其累积概率，用轮盘赌的方式进行个体的选择。概率越大越有可能被选中。<br>
+            个体$i$的选择概率：$p(i) = \frac{f(i)}{\sum_{j=1}^N f(i)}$ 个体i的累积概率：$q(i) = \sum_{j=1}^i p(j)$，之后，根据生成的随机数选择首个$q(i) \geq r(随机数)$的个体。
+        </p>
+        <img style="display:block; margin: 0px auto;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS72Vgc4ekNWEviLlX6qoaIzx0aavKqnLn9Og&s">
+        <h3>交叉算子</h3>
+        <p>本实验采用单点交叉法，即从当前种群中选择两个父代个体进行交叉操作。选择这两个父代个体中的共同状态点(起点、终点除外)，交叉之后，进行分割，如下图所示，又重新生成两个新的子代。
+        </p>
+        <img style="display:block; margin: 0px auto;" src="img/fig2.jpg">
+        <h3>突变算子</h3>
+        <p>本实验采用的是局部突变的方案(局部路径重生成)，随机选择路径中的两个位置，确定一个子路径段。两个点之间的距离仍是由参数进行调控，以确保突变的程度，子路径段的生成仍是由蒙特卡洛的方法进行生成。
+            \[
+            \text{新的组合路径：}\xi' = [\xi[0 : i_{\text{start}}-1], \xi_{\text{mutation}}, \xi[i_{\text{end}}+1 : |\xi|]]
+            \]
+        </p>
+        <img style="display:block; margin: 0px auto;" src="img/fig3.jpg">
+        <h3>对比实验</h3>
+        <p>和Bied的实验结果进行对比:</p>
+        <img style="display:inline-block;" src="img/fig4.jpg" width="48%">
+        <img style="display:inline-block;" src="img/result.PNG" width="50%">
+        <p>上图中，左图为作者Bied的各种奖励重塑方法产生的实验结果，右图为本实验的结果。作者进行的是100sessions每个session共120episodes,从中挑出10条路径(legibility值最大的5个，用蓝线表示。legibility值最小的5个，用灰线表示）。而本实验仅以开头的10条随机路径，只进行50代的循环，可以看出其legibility值已全面超越作者的各种奖励重塑方法。
+        </p>
+        <h3>总结</h3>
+        <p> 通过一开始的猜想以及实验验证，发现遗传算法在处理此类问题上具有极大的优势。实现起来其逻辑更为清晰，直接从policy上进行优化，既可以避免奖励重塑方法中$\beta$对实验的影响($\beta$需反复实验，才能使得最终策略效果比较好)，也可以避免智能体在训练过程中出现的正反馈循环问题("刷分"现象，一个回合消耗了大量步数，仍难以到达终点)。同时，此算法表现依旧出色，少量的迭代，便能产生优质的结果。由于，其逻辑实现更为清晰，似乎将其扩展到更为复杂的系统中也变得容易起来，比如连续空间，复杂多智能体空间，动态空间，带地标的空间等等。也可更深入研究此算法，以配合实验3的工作，也可将其与强化学习方法结合起来一起研究。
+        </p>
+    </p>
 </body>
 </html>
