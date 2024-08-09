@@ -2,7 +2,8 @@
     box-sizing: border-box;
 }
 body{
-    font-family: 'Arial', Helvetica, sans-serif;
+    /* font-family: 'Arial', Helvetica, sans-serif; */
+    font:400 17px/1.36 "Open Sans","PingFang SC","Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei","Segoe UI Emoji","Segoe UI Symbol",Helvetica,Arial,-apple-system,system-ui,sans-serif;
     margin: 0;
 }
 p{
@@ -18,7 +19,7 @@ header{
     /* background-image: url(https://i.pinimg.com/originals/f5/a8/bc/f5a8bcf3313c854c2cee4bcb7f318938.jpg); */
 }  
 nav{
-   height: 3700px;
+   height: 3800px;
    background-color:#ccc;
    float: left;
    width: 10%;
@@ -32,7 +33,7 @@ article{
  float: left;
  width: 90%;
  padding: 20px;
- height: 3700px; 
+ height: 3800px; 
  background-color: #f1f1f1;
 }
 footer{
