@@ -19,7 +19,7 @@ header{
     /* background-image: url(https://i.pinimg.com/originals/f5/a8/bc/f5a8bcf3313c854c2cee4bcb7f318938.jpg); */
 }  
 nav{
-   height: 3800px;
+   height: 3839px;
    background-color:#ccc;
    float: left;
    width: 10%;
@@ -33,12 +33,12 @@ article{
  float: left;
  width: 90%;
  padding: 20px;
- height: 3800px; 
+ height: 3839px; 
  background-color: #f1f1f1;
 }
 footer{
     text-align: center;
-    padding: 15px;
+    padding: 2px;
     color:white;
     background-color: #777;
 }
